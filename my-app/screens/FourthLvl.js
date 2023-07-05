@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, ImageBackground, Image, View, Alert, TouchableOpacity, Text, Button } from 'react-native';
-import { useDispatch } from 'react-redux/es/exports';
+import { useDispatch, } from 'react-redux/es/exports';
+import { useSelector } from 'react-redux';
+import { saveCompletedLevels } from '../redax/store';
 
 import Timer from '../components/Timer/Timer';
 
 import { incrementLvl } from '../redax/store';
 
 const FourthLvl = ({ navigation }) => {
-
 
     const [board, setBoard] = useState([
          { id: 1, image: require('../assets/images/lvl_4/image_part_001.jpg') },
@@ -35,6 +36,7 @@ const FourthLvl = ({ navigation }) => {
     const [complited, setComplited] = useState(false);
 
     const dispatch = useDispatch();
+    const unlockedLevels = useSelector((state) => state.unlockedLevels);
 
     const level = 4;
     const timer = 10 * 60 - level * 10 + 10;
@@ -101,7 +103,7 @@ const FourthLvl = ({ navigation }) => {
     };
     //
     const addAnlocadLvl = () => {
-        dispatch(incrementLvl(1));
+        dispatch(saveCompletedLevels(unlockedLevels + 1));
     };
 
 

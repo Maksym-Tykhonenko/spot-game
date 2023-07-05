@@ -1,9 +1,17 @@
-import React, { useState} from "react";
+import React, { useEffect} from "react";
 import { View, Text, StyleSheet, ImageBackground, TouchableOpacity,  } from "react-native";
+import { getCompletedLevels } from "../redax/store";
+import { useDispatch } from 'react-redux/es/exports';
 
 const HomeScreen = ({ navigation }) => {
 
-    //
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getCompletedLevels());
+  }, []);
+
+ 
     return (
 
         <View style={styles.conteiner}>
@@ -31,9 +39,8 @@ const HomeScreen = ({ navigation }) => {
         </View>
     );
 };
-//
-//
-//
+
+
 const styles = StyleSheet.create({
   conteiner: {
     flex: 1,

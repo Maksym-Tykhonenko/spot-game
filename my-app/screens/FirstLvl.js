@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Alert, TouchableOpacity, Text, Button, Image, ImageBackground } from 'react-native';
-import { useDispatch } from 'react-redux/es/exports';
+import { useDispatch, } from 'react-redux/es/exports';
+import { useSelector } from 'react-redux';
+import { saveCompletedLevels } from '../redax/store';
 
 import Timer from '../components/Timer/Timer';
 
-import { incrementLvl } from '../redax/store';
 
 const FirstLvl = ({ navigation }) => {
 
@@ -36,6 +37,7 @@ const FirstLvl = ({ navigation }) => {
     const [complited, setComplited] = useState(false);
 
     const dispatch = useDispatch();
+    const unlockedLevels = useSelector((state) => state.unlockedLevels);
 
     const level = 1;
     const timer = 10 * 60;
@@ -45,7 +47,8 @@ const FirstLvl = ({ navigation }) => {
 
         mixingPuzzles();
     }, []);
-
+    //
+    
     //если собрал пазл то сообщ о победе(пропуская первый рендер)
     useEffect(() => {
         if (firtRender) {
@@ -55,6 +58,7 @@ const FirstLvl = ({ navigation }) => {
             Alert.alert('Ты победил!');
             setComplited(true);
             addAnlocadLvl();
+
         }
     }, []);
     /////////////////////////////
@@ -102,9 +106,12 @@ const FirstLvl = ({ navigation }) => {
     };
     //
     const addAnlocadLvl = () => {
-        dispatch(incrementLvl(1));
+        dispatch(saveCompletedLevels(unlockedLevels + 1));
+        
     };
+//////////
 
+/////////
    
     
     return (

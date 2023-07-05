@@ -1,10 +1,18 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { View, ScrollView, Button, TouchableOpacity, Text, Image, StyleSheet, ImageBackground } from 'react-native';
+import { useDispatch } from 'react-redux/es/exports';
 import { useSelector } from 'react-redux';
+import { getCompletedLevels } from '../redax/store';
 
 const LvlSelectionScreen = ({ navigation }) => {
  
     const unlockedLevels = useSelector(state => state.myUnlockdLvl);
+    //const dispatch = useDispatch();
+
+    
+    //useEffect(() => {
+    //    dispatch(getCompletedLevels());
+    //}, []);
 
     const handleLevelSelect = (level) => {
         if (level <= unlockedLevels) {
